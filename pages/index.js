@@ -19,14 +19,14 @@ const Home = () => {
 	}, [])
 
 	return (
-		<Layout>
+		<>
 			<Head>
 				<title>Weather App</title>
 				<meta name="Weather App" content="Find weather locally and globally." />
 				<link rel="icon" href="/favicon.ico" />
-				<div>hello world</div>
 			</Head>
-		</Layout>
+			<div>hello world</div>
+		</>
 	)
 }
 
