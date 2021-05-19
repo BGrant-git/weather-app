@@ -1,10 +1,11 @@
-import { NavContainer } from './layoutStyles'
+import { NavContainer, FooterContainer } from './layoutStyles'
 
 const Layout = ({ children }) => {
 	return (
 		<>
 			<NavContainer />
 			{children}
+			<FooterContainer />
 		</>
 	)
 }

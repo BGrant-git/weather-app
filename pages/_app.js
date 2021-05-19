@@ -1,12 +1,12 @@
 import GlobalStyle from '../globalStyles'
-import Layout from '../components/layout/Layout'
+import StoreContextProvider from '../store/context'
 
 function MyApp({ Component, pageProps }) {
 	return (
-		<Layout>
+		<StoreContextProvider>
 			<GlobalStyle />
 			<Component {...pageProps} />
-		</Layout>
+		</StoreContextProvider>
 	)
 }
 
