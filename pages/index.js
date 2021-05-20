@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import { useEffect } from 'react'
+import styled from 'styled-components'
 
 import { api_call } from '../store/context'
-import { Root } from './indexStyles'
 import WeatherBoxDesk from '../components/weatherBoxDesk/WeatherBoxDesk'
 
 const Home = () => {
@@ -23,5 +23,13 @@ const Home = () => {
 		</>
 	)
 }
+
+const Root = styled.div`
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`
 
 export default Home
