@@ -36,23 +36,23 @@ export const randomCity = () => {
 	return citiesList[Math.floor(Math.random() * citiesList.length)]
 }
 
-export const setCity = ({ setCityVal, query }) => {
+export const setCity = ({ setCity, query }) => {
 	useEffect(() => {
-		setCityVal(query)
+		setCity(query)
 	}, [query])
 }
 
 const StoreContextProvider = ({ children }) => {
-	const [searchVal, setSearchVal] = useState('')
+	const [search, setSearch] = useState('')
 	const [query, setQuery] = useState('')
-	const [cityVal, setCityVal] = useState(randomCity())
+	const [city, setCity] = useState(randomCity())
 
 	return (
 		<StoreContext.Provider
 			value={{
-				searchVal: [searchVal, setSearchVal],
+				search: [search, setSearch],
 				query: [query, setQuery],
-				cityVal: [cityVal, setCityVal],
+				city: [city, setCity],
 			}}
 		>
 			{children}

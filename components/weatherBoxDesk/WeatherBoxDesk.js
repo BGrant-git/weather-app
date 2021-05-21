@@ -18,11 +18,16 @@ const Unit = styled.div`
 `
 
 const WeatherBoxDesk = () => {
-	const { cityVal, setCityVal } = useContext(StoreContext)
+	const { city, query, search } = useContext(StoreContext)
+
+	const [cityVal, setCityVal] = city
+	const [queryVal, serQueryVal] = query
+	const [searchVal, setSearchVal] = search
+
 	return (
 		<Container>
 			<Unit>
-				<h1 suppressHydrationWarning>{cityVal[0]}</h1>
+				<h1 suppressHydrationWarning>{city}</h1>
 			</Unit>
 			<Unit />
 		</Container>
