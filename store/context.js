@@ -46,6 +46,8 @@ const StoreContextProvider = ({ children }) => {
 	const [search, setSearch] = useState('')
 	const [query, setQuery] = useState('')
 	const [city, setCity] = useState(randomCity())
+	const [lat, setLat] = useState([])
+	const [long, setLong] = useState([])
 
 	return (
 		<StoreContext.Provider
@@ -53,6 +55,8 @@ const StoreContextProvider = ({ children }) => {
 				search: [search, setSearch],
 				query: [query, setQuery],
 				city: [city, setCity],
+				lat: [lat, setLat],
+				long: [long, setLong],
 			}}
 		>
 			{children}

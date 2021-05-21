@@ -27,7 +27,7 @@ const WeatherBoxDesk = () => {
 	return (
 		<Container>
 			<Unit>
-				<h1 suppressHydrationWarning>{city}</h1>
+				<h1 suppressHydrationWarning>{cityVal}</h1>
 			</Unit>
 			<Unit />
 		</Container>
