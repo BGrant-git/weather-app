@@ -20,7 +20,14 @@ export const weather_data_api_call = async () => {
 	console.log(response)
 }
 
-export const randomCity = () => {
+const StoreContextProvider = ({ children }) => {
+	const [search, setSearch] = useState('')
+	const [query, setQuery] = useState('')
+	const [city, setCity] = useState('')
+	const [lat, setLat] = useState('')
+	const [long, setLong] = useState('')
+	const [userLoc, setUserLoc] = useState([])
+
 	const citiesList = [
 		'London',
 		'Edinburgh',
@@ -32,22 +39,17 @@ export const randomCity = () => {
 		'Sydney',
 		'Wellington',
 	]
+	const randomCity = citiesList[Math.floor(Math.random() * citiesList.length)]
 
-	return citiesList[Math.floor(Math.random() * citiesList.length)]
-}
+	const setCityHandler = ({ setCity, userLoc }) => {
+		// check if location has been provided
+		// if it has set city to that location
+		// if not set city to random city
+	}
 
-export const setCity = ({ setCity, query }) => {
 	useEffect(() => {
-		setCity(query)
+		setCityHandler(setCity, userLoc)
 	}, [query])
-}
-
-const StoreContextProvider = ({ children }) => {
-	const [search, setSearch] = useState('')
-	const [query, setQuery] = useState('')
-	const [city, setCity] = useState(randomCity())
-	const [lat, setLat] = useState([])
-	const [long, setLong] = useState([])
 
 	return (
 		<StoreContext.Provider
@@ -57,6 +59,7 @@ const StoreContextProvider = ({ children }) => {
 				city: [city, setCity],
 				lat: [lat, setLat],
 				long: [long, setLong],
+				userLoc: [userLoc, setUserLoc],
 			}}
 		>
 			{children}
