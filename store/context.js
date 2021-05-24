@@ -39,7 +39,6 @@ const StoreContextProvider = ({ children }) => {
 	const [city, setCity] = useState(randomCity)
 	const [lat, setLat] = useState('')
 	const [long, setLong] = useState('')
-	const [userLoc, setUserLoc] = useState([])
 
 	return (
 		<StoreContext.Provider
@@ -49,8 +48,6 @@ const StoreContextProvider = ({ children }) => {
 				city: [city, setCity],
 				lat: [lat, setLat],
 				long: [long, setLong],
-				userLoc: [userLoc, setUserLoc],
-				randomCity: randomCity,
 			}}
 		>
 			{children}

@@ -23,7 +23,6 @@ const WeatherBoxDesk = () => {
 	const [cityVal, setCityVal] = city
 	const [latVal, setLatVal] = lat
 	const [longVal, setLongVal] = long
-	const [userLocVal, setUserLocVal] = userLoc
 
 	// suppressHydrationWarning
 

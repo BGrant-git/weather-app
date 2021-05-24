@@ -25,7 +25,7 @@ const ContentContainer = styled.div`
 `
 
 const Home = () => {
-	const { city, lat, long, userLoc, randomCity } = useContext(StoreContext)
+	const { city, lat, long } = useContext(StoreContext)
 
 	const [cityVal, setCityVal] = city
 	const [latVal, setLatVal] = lat
