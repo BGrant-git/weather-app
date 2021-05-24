@@ -25,26 +25,23 @@ const ContentContainer = styled.div`
 `
 
 const Home = () => {
-	const { lat, long, userLoc } = useContext(StoreContext)
+	const { city, lat, long, userLoc, randomCity } = useContext(StoreContext)
 
+	const [cityVal, setCityVal] = city
 	const [latVal, setLatVal] = lat
 	const [longVal, setLongVal] = long
-	const [userLocVal, setUserLocVal] = userLoc
 
 	useEffect(() => {
 		navigator.geolocation.getCurrentPosition(function (position) {
-			setUserLocVal([
-				`${position.coords.latitude}`,
-				`${position.coords.longitude}`,
-			])
+			setLongVal(`${position.coords.longitude}`)
+			setLatVal(`${position.coords.latitude}`)
 		})
-
-		console.log(userLocVal)
-	}, [userLocVal])
+		weather_data_api_call(latVal, longVal)
+	}, [longVal, latVal])
 
 	useEffect(() => {
-		weather_location_api_call()
-		weather_data_api_call()
+		setCityVal(randomCity)
+		weather_location_api_call(cityVal)
 	}, [])
 
 	return (
