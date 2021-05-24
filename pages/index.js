@@ -33,16 +33,15 @@ const Home = () => {
 
 	useEffect(() => {
 		navigator.geolocation.getCurrentPosition(function (position) {
-			setLongVal(`${position.coords.longitude}`)
-			setLatVal(`${position.coords.latitude}`)
+			const userLong = `${position.coords.longitude}`
+			const userLat = `${position.coords.latitude}`
+			weather_data_api_call(userLat, userLong)
 		})
-		weather_data_api_call(latVal, longVal)
 	}, [longVal, latVal])
 
 	useEffect(() => {
-		setCityVal(randomCity)
 		weather_location_api_call(cityVal)
-	}, [])
+	}, [cityVal])
 
 	return (
 		<Root img={backgroundDay}>

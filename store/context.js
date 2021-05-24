@@ -10,6 +10,9 @@ export const weather_location_api_call = async (cityVal) => {
 	console.log(response)
 }
 
+const lat = 33.44
+const lon = -94.04
+
 export const weather_data_api_call = async (userLat, userLong) => {
 	const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${userLat}&lon=${userLong}&exclude=minutely,alerts&appid=${process.env.OPEN_WEATHER_API_KEY}`
 	const request = axios.get(url)
@@ -33,7 +36,7 @@ const randomCity = citiesList[Math.floor(Math.random() * citiesList.length)]
 const StoreContextProvider = ({ children }) => {
 	const [search, setSearch] = useState('')
 	const [query, setQuery] = useState('')
-	const [city, setCity] = useState(``)
+	const [city, setCity] = useState(randomCity)
 	const [lat, setLat] = useState('')
 	const [long, setLong] = useState('')
 	const [userLoc, setUserLoc] = useState([])

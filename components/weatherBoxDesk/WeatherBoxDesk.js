@@ -30,7 +30,7 @@ const WeatherBoxDesk = () => {
 	return (
 		<Container>
 			<Unit>
-				<p>{cityVal}</p>
+				<p suppressHydrationWarning>{cityVal}</p>
 				<p>{latVal}</p>
 				<p>{longVal}</p>
 			</Unit>
