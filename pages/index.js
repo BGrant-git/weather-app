@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import {
 	weather_location_api_call,
 	weather_data_api_call,
-	randomCity,
+	StoreContext,
 } from '../store/context'
 import WeatherBoxDesk from '../components/weatherBoxDesk/WeatherBoxDesk'
 
@@ -25,11 +25,23 @@ const ContentContainer = styled.div`
 `
 
 const Home = () => {
+	const { city, lat, long } = useContext(StoreContext)
+
+	const [cityVal, setCityVal] = city
+	const [latVal, setLatVal] = lat
+	const [longVal, setLongVal] = long
+
 	useEffect(() => {
-		weather_location_api_call()
-		weather_data_api_call()
-		randomCity()
-	}, [])
+		navigator.geolocation.getCurrentPosition(function (position) {
+			const userLong = `${position.coords.longitude}`
+			const userLat = `${position.coords.latitude}`
+			weather_data_api_call(userLat, userLong)
+		})
+	}, [longVal, latVal])
+
+	useEffect(() => {
+		weather_location_api_call(cityVal)
+	}, [cityVal])
 
 	return (
 		<Root img={backgroundDay}>

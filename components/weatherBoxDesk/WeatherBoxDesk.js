@@ -18,16 +18,20 @@ const Unit = styled.div`
 `
 
 const WeatherBoxDesk = () => {
-	const { city, query, search } = useContext(StoreContext)
+	const { city, userLoc, lat, long } = useContext(StoreContext)
 
 	const [cityVal, setCityVal] = city
-	const [queryVal, serQueryVal] = query
-	const [searchVal, setSearchVal] = search
+	const [latVal, setLatVal] = lat
+	const [longVal, setLongVal] = long
+
+	// suppressHydrationWarning
 
 	return (
 		<Container>
 			<Unit>
-				<h1 suppressHydrationWarning>{city}</h1>
+				<p suppressHydrationWarning>{cityVal}</p>
+				<p>{latVal}</p>
+				<p>{longVal}</p>
 			</Unit>
 			<Unit />
 		</Container>
