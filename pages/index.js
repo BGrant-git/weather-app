@@ -25,23 +25,24 @@ const ContentContainer = styled.div`
 `
 
 const Home = () => {
-	const { city, lat, long } = useContext(StoreContext)
+	const { lat, long } = useContext(StoreContext)
 
-	const [cityVal, setCityVal] = city
-	const [latVal, setLatVal] = lat
-	const [longVal, setLongVal] = long
+	const [latVal] = lat
+	const [longVal] = long
 
 	useEffect(() => {
 		navigator.geolocation.getCurrentPosition(function (position) {
 			const userLong = `${position.coords.longitude}`
 			const userLat = `${position.coords.latitude}`
 			weather_data_api_call(userLat, userLong)
+			weather_location_api_call(userLat, userLong)
 		})
 	}, [longVal, latVal])
 
 	useEffect(() => {
-		weather_location_api_call(cityVal)
-	}, [cityVal])
+		weather_data_api_call(latVal, longVal)
+		weather_location_api_call(latVal, longVal)
+	}, [])
 
 	return (
 		<Root img={backgroundDay}>
