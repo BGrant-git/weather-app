@@ -3,20 +3,6 @@ import axios from 'axios'
 
 export const StoreContext = createContext()
 
-export const weather_location_api_call = async (lat, long) => {
-	const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${process.env.OPEN_WEATHER_API_KEY}`
-	const request = axios.get(url)
-	const response = await request
-	console.log(response)
-}
-
-export const weather_data_api_call = async (lat, long) => {
-	const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,alerts&appid=${process.env.OPEN_WEATHER_API_KEY}`
-	const request = axios.get(url)
-	const response = await request
-	console.log(response)
-}
-
 const citiesList = [
 	[51.509865, -0.118092],
 	[55.953251, -3.188267],
@@ -35,10 +21,22 @@ const StoreContextProvider = ({ children }) => {
 	const [query, setQuery] = useState('')
 	const [lat, setLat] = useState(randomCity[0])
 	const [long, setLong] = useState(randomCity[1])
+	const [locationData, setLocationData] = useState({})
+	const [forecastData, setForecastData] = useState({})
 
-	useEffect(() => {
-		console.log(lat)
-	}, [])
+	const weather_location_api_call = async (lat, long, x) => {
+		const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${process.env.OPEN_WEATHER_API_KEY}`
+		const request = axios.get(url)
+		const response = await request
+		setLocationData(response)
+	}
+
+	const weather_data_api_call = async (lat, long) => {
+		const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,alerts&appid=${process.env.OPEN_WEATHER_API_KEY}`
+		const request = axios.get(url)
+		const response = await request
+		setForecastData(response)
+	}
 
 	return (
 		<StoreContext.Provider
@@ -47,6 +45,10 @@ const StoreContextProvider = ({ children }) => {
 				query: [query, setQuery],
 				lat: [lat, setLat],
 				long: [long, setLong],
+				locationData: [locationData, setLocationData],
+				forecastData: [forecastData, setForecastData],
+				weather_location_api_call,
+				weather_data_api_call,
 			}}
 		>
 			{children}

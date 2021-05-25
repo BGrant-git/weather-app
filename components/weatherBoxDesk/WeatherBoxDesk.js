@@ -18,18 +18,25 @@ const Unit = styled.div`
 `
 
 const WeatherBoxDesk = () => {
-	const { lat, long } = useContext(StoreContext)
+	const { lat, long, locationData, forecastData } = useContext(StoreContext)
 
 	const [latVal, setLatVal] = lat
 	const [longVal, setLongVal] = long
+	const [locationDataVal, setLocationDataVal] = locationData
+	const [forecastDataVal, setForecastDataVal] = forecastData
 
 	// suppressHydrationWarning
+
+	const isEmpty = (obj) => Object.keys(obj).length === 0
+
+	console.log(isEmpty(locationDataVal))
 
 	return (
 		<Container>
 			<Unit>
-				<p suppressHydrationWarning>{latVal}</p>
-				<p suppressHydrationWarning>{longVal}</p>
+				<p suppressHydrationWarning>
+					{isEmpty(locationDataVal) ? null : locationDataVal.data.name}
+				</p>
 			</Unit>
 			<Unit />
 		</Container>

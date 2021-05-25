@@ -3,11 +3,7 @@ import Image from 'next/image'
 import { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import {
-	weather_location_api_call,
-	weather_data_api_call,
-	StoreContext,
-} from '../store/context'
+import { StoreContext } from '../store/context'
 import WeatherBoxDesk from '../components/weatherBoxDesk/WeatherBoxDesk'
 
 const backgroundDay = require('../public/images/background/sky-vector-01.jpg')
@@ -25,7 +21,8 @@ const ContentContainer = styled.div`
 `
 
 const Home = () => {
-	const { lat, long } = useContext(StoreContext)
+	const { lat, long, weather_data_api_call, weather_location_api_call } =
+		useContext(StoreContext)
 
 	const [latVal] = lat
 	const [longVal] = long
