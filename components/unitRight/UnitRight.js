@@ -1,9 +1,9 @@
 import { useContext } from 'react'
 
 import { StoreContext } from '../../store/context'
-import SearchBar from '../searchbar/SearchBar'
 
-import { Container, WeatherForTitle, CityTitle } from './unitRightStyles'
+import { Container } from './unitRightStyles'
+import DailyForecast from '../dailyForecast/DailyForecast'
 
 const UnitRight = () => {
 	const { lat, long, locationData, forecastData } = useContext(StoreContext)
@@ -15,17 +15,30 @@ const UnitRight = () => {
 
 	const isObjEmpty = (obj) => Object.keys(obj).length === 0
 
-	const isEmpty = isObjEmpty(locationDataVal)
+	const isEmpty = isObjEmpty(forecastDataVal)
+
+	const dailyForecastData = isEmpty
+		? null
+		: forecastDataVal.data.daily.slice(0, 7)
+
+	// console.log(dailyForecastData)
 
 	return (
 		<Container>
-			<div>
-				<WeatherForTitle>Weather for:</WeatherForTitle>
-				<CityTitle suppressHydrationWarning>
-					{!isEmpty ? 'hello' : 'Loading Location...'}
-				</CityTitle>
-				<SearchBar />
-			</div>
+			<h1>7 Day Forecast</h1>
+			{isEmpty
+				? 'Loading...'
+				: dailyForecastData.map((item, i) => (
+						<DailyForecast
+							isEmpty={isEmpty}
+							date={item.dt}
+							temp={item.temp}
+							description={item.weather[0].description}
+							icon={item.weather[0].icon}
+							key={i}
+						/>
+				  ))}
+			<DailyForecast />
 		</Container>
 	)
 }

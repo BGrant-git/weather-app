@@ -31,22 +31,22 @@ const UnitLeft = () => {
 		? 'Loading Image...'
 		: `https://openweathermap.org/img/wn/${forecastDataVal.data.current.weather[0].icon}@2x.png`
 
+	const tempToCelsius = (temp) =>
+		Math.round((temp - 273.15 + Number.EPSILON) * 100) / 100
+
 	let currentTempToCelsuis = isEmpty
 		? null
-		: Math.round(
-				(forecastDataVal.data.current.temp - 273.15 + Number.EPSILON) * 100
-		  ) / 100
+		: tempToCelsius(forecastDataVal.data.current.temp)
 
 	let feelsLikeToCelsuis = isEmpty
 		? null
-		: Math.round(
-				(forecastDataVal.data.current.feels_like - 273.15 + Number.EPSILON) *
-					100
-		  ) / 100
+		: tempToCelsius(forecastDataVal.data.current.feels_like)
 
 	const hourlyForecastData = isEmpty
 		? null
 		: forecastDataVal.data.hourly.slice(0, 5)
+
+	// console.log(hourlyForecastData)
 
 	return (
 		<Container>
@@ -59,7 +59,6 @@ const UnitLeft = () => {
 					<p>Current Temp: {currentTempToCelsuis}°C</p>
 					<p>Feels Like: {feelsLikeToCelsuis}°C</p>
 				</div>
-
 				<div>
 					<img src={currentWeatherImageUrl} alt="" />
 				</div>
@@ -72,6 +71,7 @@ const UnitLeft = () => {
 								isEmpty={isEmpty}
 								time={item.dt}
 								temp={item.temp}
+								tempToCelsius={tempToCelsius}
 								img={item.weather[0].icon}
 								key={i}
 							/>
