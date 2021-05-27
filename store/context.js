@@ -18,13 +18,13 @@ const randomCity = citiesList[Math.floor(Math.random() * citiesList.length)]
 
 const StoreContextProvider = ({ children }) => {
 	const [search, setSearch] = useState('')
-	const [query, setQuery] = useState('')
+	const [cityQuery, setCityQuery] = useState('')
 	const [lat, setLat] = useState(randomCity[0])
 	const [long, setLong] = useState(randomCity[1])
 	const [locationData, setLocationData] = useState({})
 	const [forecastData, setForecastData] = useState({})
 
-	const weather_location_api_call = async (lat, long, x) => {
+	const weather_location_api_call = async (lat, long) => {
 		const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${process.env.OPEN_WEATHER_API_KEY}`
 		const request = axios.get(url)
 		const response = await request
@@ -38,14 +38,32 @@ const StoreContextProvider = ({ children }) => {
 		setForecastData(response)
 	}
 
+	const weather_city_search_api_call = async (city) => {
+		const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.OPEN_WEATHER_API_KEY}`
+		const request = axios.get(url)
+		const response = await request
+	}
+
 	const tempToCelsius = (temp) =>
 		Math.round((temp - 273.15 + Number.EPSILON) * 100) / 100
+
+	const handleSearchChange = (event) => {
+		event.preventDefault()
+		setSearch(event.target.value)
+	}
+
+	const handleSubmit = (event) => {
+		event.preventDefault()
+		setCityQuery(search)
+		setSearch('')
+		console.log(cityQuery)
+	}
 
 	return (
 		<StoreContext.Provider
 			value={{
 				search: [search, setSearch],
-				query: [query, setQuery],
+				cityQuery: [cityQuery, setCityQuery],
 				lat: [lat, setLat],
 				long: [long, setLong],
 				locationData: [locationData, setLocationData],
@@ -53,6 +71,8 @@ const StoreContextProvider = ({ children }) => {
 				weather_location_api_call,
 				weather_data_api_call,
 				tempToCelsius,
+				handleSearchChange,
+				handleSubmit,
 			}}
 		>
 			{children}
