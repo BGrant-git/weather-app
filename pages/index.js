@@ -34,12 +34,12 @@ const Home = () => {
 			weather_data_api_call(userLat, userLong)
 			weather_location_api_call(userLat, userLong)
 		})
-	}, [longVal, latVal])
+	}, [])
 
 	useEffect(() => {
 		weather_data_api_call(latVal, longVal)
 		weather_location_api_call(latVal, longVal)
-	}, [])
+	}, [latVal, longVal])
 
 	return (
 		<Root img={backgroundDay}>
