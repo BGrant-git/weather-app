@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import axios from 'axios'
 
 export const StoreContext = createContext()
@@ -29,6 +29,7 @@ const StoreContextProvider = ({ children }) => {
 		const request = axios.get(url)
 		const response = await request
 		setLocationData(response)
+		console.log(response)
 	}
 
 	const weather_data_api_call = async (lat, long) => {
@@ -36,12 +37,15 @@ const StoreContextProvider = ({ children }) => {
 		const request = axios.get(url)
 		const response = await request
 		setForecastData(response)
+		console.log(response)
 	}
 
-	const weather_city_search_api_call = async (city) => {
-		const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.OPEN_WEATHER_API_KEY}`
+	const city_search_api_call = async (city) => {
+		const url = `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=44d8a708fea04782b7af78390ad5d628`
 		const request = axios.get(url)
 		const response = await request
+		setLat(response.data.results[0].geometry.lat)
+		setLong(response.data.results[0].geometry.lng)
 	}
 
 	const tempToCelsius = (temp) =>
@@ -49,21 +53,29 @@ const StoreContextProvider = ({ children }) => {
 
 	const handleSearchChange = (event) => {
 		event.preventDefault()
-		setSearch(event.target.value)
+		setSearch(event.target.value.toLowerCase())
 	}
 
 	const handleSubmit = (event) => {
 		event.preventDefault()
 		setCityQuery(search)
 		setSearch('')
-		console.log(cityQuery)
 	}
+
+	const handleApiSearch = () => {
+		if (cityQuery) {
+			city_search_api_call(cityQuery)
+		}
+	}
+
+	useEffect(() => {
+		handleApiSearch()
+	}, [cityQuery])
 
 	return (
 		<StoreContext.Provider
 			value={{
 				search: [search, setSearch],
-				cityQuery: [cityQuery, setCityQuery],
 				lat: [lat, setLat],
 				long: [long, setLong],
 				locationData: [locationData, setLocationData],
