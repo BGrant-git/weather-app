@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState } from 'react'
 import axios from 'axios'
 
 export const StoreContext = createContext()
@@ -38,6 +38,9 @@ const StoreContextProvider = ({ children }) => {
 		setForecastData(response)
 	}
 
+	const tempToCelsius = (temp) =>
+		Math.round((temp - 273.15 + Number.EPSILON) * 100) / 100
+
 	return (
 		<StoreContext.Provider
 			value={{
@@ -49,6 +52,7 @@ const StoreContextProvider = ({ children }) => {
 				forecastData: [forecastData, setForecastData],
 				weather_location_api_call,
 				weather_data_api_call,
+				tempToCelsius,
 			}}
 		>
 			{children}
