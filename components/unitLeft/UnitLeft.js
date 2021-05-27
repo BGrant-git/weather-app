@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-import { Grid } from '@material-ui/core'
 
 import { StoreContext } from '../../store/context'
 import SearchBar from '../searchbar/SearchBar'
@@ -14,7 +13,8 @@ import {
 } from './unitLeftStyles'
 
 const UnitLeft = () => {
-	const { lat, long, locationData, forecastData } = useContext(StoreContext)
+	const { lat, long, locationData, forecastData, tempToCelsius } =
+		useContext(StoreContext)
 
 	const [latVal, setLatVal] = lat
 	const [longVal, setLongVal] = long
@@ -30,9 +30,6 @@ const UnitLeft = () => {
 	let currentWeatherImageUrl = isEmpty
 		? 'Loading Image...'
 		: `https://openweathermap.org/img/wn/${forecastDataVal.data.current.weather[0].icon}@2x.png`
-
-	const tempToCelsius = (temp) =>
-		Math.round((temp - 273.15 + Number.EPSILON) * 100) / 100
 
 	let currentTempToCelsuis = isEmpty
 		? null
@@ -71,7 +68,6 @@ const UnitLeft = () => {
 								isEmpty={isEmpty}
 								time={item.dt}
 								temp={item.temp}
-								tempToCelsius={tempToCelsius}
 								img={item.weather[0].icon}
 								key={i}
 							/>

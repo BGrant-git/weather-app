@@ -1,6 +1,11 @@
+import { useContext } from 'react'
+
+import { StoreContext } from '../../store/context'
 import { Container, Icon, Temp, Time } from './hourlyForecastStyles'
 
-const HourlyForecast = ({ isEmpty, img, temp, time, tempToCelsius }) => {
+const HourlyForecast = ({ isEmpty, img, temp, time }) => {
+	const { tempToCelsius } = useContext(StoreContext)
+
 	const UTCConverter = (utc) => {
 		const dateObj = new Date(utc * 1000)
 		return dateObj.toUTCString()
@@ -10,9 +15,7 @@ const HourlyForecast = ({ isEmpty, img, temp, time, tempToCelsius }) => {
 
 	const imageUrl = `https://openweathermap.org/img/wn/${img}@2x.png`
 
-	let tempInCelsius = Math.round((temp - 273.15 + Number.EPSILON) * 100) / 100
-
-	let tempInCelsius2 = tempToCelsius(temp)
+	let tempInCelsius = tempToCelsius(temp)
 
 	return (
 		<Container>
