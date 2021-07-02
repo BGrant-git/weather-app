@@ -43,8 +43,6 @@ const UnitLeft = () => {
 		? null
 		: forecastDataVal.data.hourly.slice(0, 5)
 
-	// console.log(hourlyForecastData)
-
 	return (
 		<Container>
 			<div>

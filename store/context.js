@@ -29,7 +29,6 @@ const StoreContextProvider = ({ children }) => {
 		const request = axios.get(url)
 		const response = await request
 		setLocationData(response)
-		console.log(response)
 	}
 
 	const weather_data_api_call = async (lat, long) => {
@@ -37,11 +36,10 @@ const StoreContextProvider = ({ children }) => {
 		const request = axios.get(url)
 		const response = await request
 		setForecastData(response)
-		console.log(response)
 	}
 
 	const city_search_api_call = async (city) => {
-		const url = `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=44d8a708fea04782b7af78390ad5d628`
+		const url = `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=${process.env.OPEN_CAGE_API_KEY}`
 		const request = axios.get(url)
 		const response = await request
 		setLat(response.data.results[0].geometry.lat)

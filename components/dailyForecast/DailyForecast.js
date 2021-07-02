@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { Grid } from '@material-ui/core'
 
 import { StoreContext } from '../../store/context'
 import { Container } from './dailyForecastStyles'
@@ -30,11 +31,24 @@ const DailyForecast = ({ isEmpty, date, temp, description, icon }) => {
 		<>
 			{date === undefined ? null : (
 				<Container>
-					<p>{forecastDate}</p>
-					<img src={iconUrl} alt="" />
-					<p>{description}</p>
-					<p>Min: {minTempInCelsius}°C</p>
-					<p>Max: {maxTempInCelsius}°C</p>
+					<Grid container alignItems="center">
+						<Grid item xs={1}></Grid>
+						<Grid item xs={1}>
+							<p>{forecastDate}</p>
+						</Grid>
+						<Grid item xs={3}>
+							<img src={iconUrl} alt="" />
+						</Grid>
+						<Grid item xs={2}>
+							<p>{description}</p>
+						</Grid>
+						<Grid item xs={2}>
+							<p>Min: {minTempInCelsius}°C</p>
+						</Grid>
+						<Grid item xs={2}>
+							<p>Max: {maxTempInCelsius}°C</p>
+						</Grid>
+					</Grid>
 				</Container>
 			)}
 		</>

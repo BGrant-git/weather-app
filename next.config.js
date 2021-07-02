@@ -13,5 +13,6 @@ module.exports = withImages({
 	},
 	env: {
 		OPEN_WEATHER_API_KEY: `${process.env.OPEN_WEATHER_API_KEY}`,
+		OPEN_CAGE_API_KEY: `${process.env.OPEN_CAGE_API_KEY}`,
 	},
 })

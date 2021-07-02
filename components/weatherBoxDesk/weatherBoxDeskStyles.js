@@ -5,6 +5,12 @@ export const Container = styled.div`
 	height: 700px;
 	display: flex;
 	justify-content: space-between;
+
+	@media (max-width: 960px) {
+		flex-direction: column;
+		justify-content: initial;
+		font-size: 75%;
+	}
 `
 
 export const UnitContainer = styled.div`
