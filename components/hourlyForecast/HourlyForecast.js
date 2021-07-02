@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
 import { StoreContext } from '../../store/context'
-import { Container, Icon, Temp, Time } from './hourlyForecastStyles'
+import { Container, StyledImg, StyledP } from './hourlyForecastStyles'
 
 const HourlyForecast = ({ isEmpty, img, temp, time }) => {
 	const { tempToCelsius } = useContext(StoreContext)
@@ -19,10 +19,10 @@ const HourlyForecast = ({ isEmpty, img, temp, time }) => {
 
 	return (
 		<Container>
-			<Time>{forecastTimes}</Time>
+			<p>{forecastTimes}</p>
 
-			<Icon src={imageUrl} alt="" />
-			<Temp>{tempInCelsius}°C</Temp>
+			<StyledImg src={imageUrl} alt="" />
+			<StyledP>{tempInCelsius}°C</StyledP>
 		</Container>
 	)
 }

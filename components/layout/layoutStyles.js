@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 
-export const NavContainer = styled.div`
+export const NavWrapper = styled.div`
 	width: 100%;
 	height: 100px;
 	background-color: black;
 `
 
-export const FooterContainer = styled.div`
+export const FooterWrapper = styled.div`
 	width: 100%;
 	height: 100px;
 	position: absolute;

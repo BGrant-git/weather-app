@@ -6,12 +6,9 @@ import { Container } from './unitRightStyles'
 import DailyForecast from '../dailyForecast/DailyForecast'
 
 const UnitRight = () => {
-	const { lat, long, locationData, forecastData } = useContext(StoreContext)
+	const { forecastData } = useContext(StoreContext)
 
-	const [latVal, setLatVal] = lat
-	const [longVal, setLongVal] = long
-	const [locationDataVal, setLocationDataVal] = locationData
-	const [forecastDataVal, setForecastDataVal] = forecastData
+	const [forecastDataVal] = forecastData
 
 	const isObjEmpty = (obj) => Object.keys(obj).length === 0
 
@@ -20,8 +17,6 @@ const UnitRight = () => {
 	const dailyForecastData = isEmpty
 		? null
 		: forecastDataVal.data.daily.slice(0, 7)
-
-	// console.log(dailyForecastData)
 
 	return (
 		<Container>

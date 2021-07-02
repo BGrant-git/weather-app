@@ -7,20 +7,16 @@ export const Container = styled.div`
 	text-align: center;
 `
 
-export const UnitContainer = styled.div``
-
-export const WeatherForTitle = styled.h2``
-
-export const CityTitle = styled.h1`
+export const StyledH1 = styled.h1`
 	margin: -10px 0;
 	font-size: 45px;
 `
 
-export const CurrentTempDisplay = styled.div`
+export const TempDisplayWrapper = styled.div`
 	display: inherit;
 `
 
-export const HourlyForecastContainer = styled.div`
+export const HourlyForecastWrapper = styled.div`
 	display: flex;
 	flex: row;
 `

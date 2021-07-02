@@ -6,20 +6,16 @@ import HourlyForecast from '../hourlyForecast/HourlyForecast'
 
 import {
 	Container,
-	WeatherForTitle,
-	CityTitle,
-	CurrentTempDisplay,
-	HourlyForecastContainer,
+	StyledH1,
+	TempDisplayWrapper,
+	HourlyForecastWrapper,
 } from './unitLeftStyles'
 
 const UnitLeft = () => {
-	const { lat, long, locationData, forecastData, tempToCelsius } =
-		useContext(StoreContext)
+	const { locationData, forecastData, tempToCelsius } = useContext(StoreContext)
 
-	const [latVal, setLatVal] = lat
-	const [longVal, setLongVal] = long
-	const [locationDataVal, setLocationDataVal] = locationData
-	const [forecastDataVal, setForecastDataVal] = forecastData
+	const [locationDataVal] = locationData
+	const [forecastDataVal] = forecastData
 
 	const isObjEmpty = (obj) => Object.keys(obj).length === 0
 
@@ -46,10 +42,10 @@ const UnitLeft = () => {
 	return (
 		<Container>
 			<div>
-				<WeatherForTitle>Weather for:</WeatherForTitle>
-				<CityTitle suppressHydrationWarning>{cityName}</CityTitle>
+				<h2>Weather for:</h2>
+				<StyledH1 suppressHydrationWarning>{cityName}</StyledH1>
 			</div>
-			<CurrentTempDisplay>
+			<TempDisplayWrapper>
 				<div>
 					<p>Current Temp: {currentTempToCelsuis}°C</p>
 					<p>Feels Like: {feelsLikeToCelsuis}°C</p>
@@ -57,8 +53,8 @@ const UnitLeft = () => {
 				<div>
 					<img src={currentWeatherImageUrl} alt="" />
 				</div>
-			</CurrentTempDisplay>
-			<HourlyForecastContainer>
+			</TempDisplayWrapper>
+			<HourlyForecastWrapper>
 				{isEmpty
 					? 'Loading...'
 					: hourlyForecastData.map((item, i) => (
@@ -70,7 +66,7 @@ const UnitLeft = () => {
 								key={i}
 							/>
 					  ))}
-			</HourlyForecastContainer>
+			</HourlyForecastWrapper>
 
 			<SearchBar />
 		</Container>
